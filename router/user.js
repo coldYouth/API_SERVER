@@ -7,7 +7,7 @@ const userHandler = require('../router_handler/user')
 // 1. 导入验证表单数据的中间件
 const expressJoi = require('@escook/express-joi')
 // 2. 导入需要的验证规则对象
-const reg_login_schema = require('../schema/user')
+const { reg_login_schema } = require('../schema/user')
 
 // 注册新用户
 // 3. 在注册新用户的路由中，声明局部中间件，对当前请求中携带的数据进行验证

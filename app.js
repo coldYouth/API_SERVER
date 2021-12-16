@@ -31,13 +31,19 @@ const expressJWT = require('express-jwt');
 // 使用 .unless({ path: [/^\/api\//] }) 指定哪些接口不需要进行 Token 的身份认证
 app.use(expressJWT({ secret: config.jwtSecretKey }).unless({ path: [/^\/api\//] }))
 
-//导入用户登录注册路由模块
-const router = require('./router/user');
-app.use('/api', router);
+// 导入并使用用户路由模块
+const userRouter = require('./router/user')
+app.use('/api', userRouter)
 
-const joi = require('@hapi/joi')
+// 导入并使用用户信息路由模块
+const userinfoRouter = require('./router/userinfo');
+// 注意：以 /my 开头的接口，都是有权限的接口，需要进行 Token 身份认证
+app.use('/my', userinfoRouter);
+
+
 
 // 错误中间件
+const joi = require('joi')
 app.use(function (err, req, res, next) {
     // 数据验证失败
     if (err instanceof joi.ValidationError) return res.cc(err)
@@ -47,7 +53,7 @@ app.use(function (err, req, res, next) {
     res.cc(err)
 })
 
-
+//启动服务器
 app.listen(3007, function () {
     console.log('api server running at http://127.0.0.1:3007')
 })

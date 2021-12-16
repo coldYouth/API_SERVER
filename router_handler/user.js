@@ -12,10 +12,10 @@ exports.regUser = (req, res) => {
 
     // 接收表单数据
     const userinfo = req.body
-    // 判断用户名和密码是否为空
-    if (!userinfo.username || !userinfo.password) {
-        return res.send({ status: 1, message: '用户名或密码不能为空！' })
-    }
+    /*  // 判断用户名和密码是否为空
+     if (!userinfo.username || !userinfo.password) {
+         return res.send({ status: 1, message: '用户名或密码不能为空！' })
+     } */
 
     // 定义 SQL 语句
     const sql = `select * from ev_users where username=?`
