@@ -1,0 +1,2 @@
+## 忽略任意目录下的node_modules
+node_modules/
